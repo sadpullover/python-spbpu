@@ -25,6 +25,6 @@ class Glass:
 
 if __name__ == "__main__":
     glass_instance = Glass(200, 100)
-    ...  # TODO инициализировать экземпляр класса Glass
+    # TODO инициализировать экземпляр класса Glass
     print(glass_instance.capacity_volume)  # TODO распечатать атрибут capacity_volume
     print(glass_instance.occupied_volume)  # TODO распечатать атрибут occupied_volume
