@@ -1,30 +1,36 @@
-from typing import Union
+class Book:
+  def __init__(self, id, name, pages):
+    self.id = id
+    self.name = name
+    self.pages = pages
 
 
-class Glass:
-    def __init__(self, capacity_volume: Union[int, float], occupied_volume: Union[int, float]):
-        #  TODO заменить на метод
-        self.capacity_volume = None
-        self.init_capacity_volume(capacity_volume)
+    def __str__(self):
+        return f"Book: {self.name}"
 
-        if not isinstance(occupied_volume, (int, float)):
-            raise TypeError
-        if occupied_volume < 0:
-            raise ValueError
-        self.occupied_volume = occupied_volume
+    def __repr__(self):
+        return f"Book({self.id}, '{self.name}', {self.pages})"
+      
+class Library:
+    def __init__(self, books=[]):
+      self.books = books
 
-#  TODO создать метод, который будет инициализировать атрибут capacity_volume
-    def init_capacity_volume(self, capacity_volume: Union[int, float]):
-        self.capacity_volume = capacity_volume
+    def get_next_book_id(self):
+        if not self.books:
+            return 1
+        return max(book.id for book in self.books) + 1
 
-        if not isinstance(capacity_volume, (int, float)):
-            raise TypeError
-        if not capacity_volume > 0:
-            raise ValueError
-
+    def get_index_by_book_id(self, book_id):
+        for index, book in enumerate(self.books):
+            if book.id == book_id:
+                return index
+        return None
 
 if __name__ == "__main__":
-    glass_instance = Glass(200, 100)
-    # TODO инициализировать экземпляр класса Glass
-    print(glass_instance.capacity_volume)  # TODO распечатать атрибут capacity_volume
-    print(glass_instance.occupied_volume)  # TODO распечатать атрибут occupied_volume
+  book1 = Book(1, "Python Programming", 300)
+  book2 = Book(2, "Data Science Essentials", 250)
+
+  library = Library([book1, book2])
+
+  print(library.get_next_book_id())  # Output: 3
+  print(library.get_index_by_book_id(2))  # Output: 1
